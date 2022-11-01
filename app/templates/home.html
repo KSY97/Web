@@ -41,7 +41,7 @@
             </div>
             <div class="row justify-content-md-center">
                 <div class="col-md-auto">
-                    아직 계정이 없으신가요? <a href="{{ url_for('auth.signup') }}">회원가입</a>
+                    <a href="{{ url_for('auth.signup') }}">회원가입</a>
                 </div>
                 <div class="col-md-1">
                     <label></label>
@@ -50,13 +50,13 @@
                     <button type="submit" class="btn btn-primary">로그인</button>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-1">
+                    <label></label>
+                </div>
+            </div>
             {% endif %}
         </form>
     </div>
-    
-    <div class="container">
-    
-    </div>
-
 </body>
 {% endblock %}

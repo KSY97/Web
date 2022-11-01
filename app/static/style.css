@@ -1,3 +1,6 @@
+html, body {
+    height: 100%
+}
 .main_box {
     display: block;
     margin: 100px auto;
@@ -14,3 +17,14 @@
 a {
     text-decoration-line: none;
   }
+#wrapper{
+    height: auto;
+    min-height: 100%;
+    padding-bottom: 100px;
+}
+footer{
+    background-color: #c0c0c0;
+    height: 100px;
+    position : relative;
+    transform : translateY(-100%);
+}
