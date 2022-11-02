@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- 메인 영역 -->
+<div class="container1">
+
+    <!-- 사이드바 영역 -->
+    <div class="sidebar1">
+        123<br>
+        456
+  
+      <!-- 메뉴 상태 변경 버튼 추가 -->
+      <label class="toggle1">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+    </div>
+  
+    <!-- 
+              컨텐츠 영역 : 
+              - 더미 텍스트(Lorem ipsum)을 활용하여 내용 강제로 늘려 테스트
+          -->
+    <div class="contents1">
+      Lorem ipsum
+    </div>
+  
+</div>
+<script src="{{ url_for('static', filename='main.js') }}"></script>
+{% endblock %}

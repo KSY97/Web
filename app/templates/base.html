@@ -6,9 +6,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.js') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
         <title>Hello</title>
+
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     </head>
     <body>
         <div id="wrapper">
@@ -23,5 +24,6 @@
         {% include "footer.html" %}
         <!-- Bootstrap JS -->
         <script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='script.js') }}"></script>
     </body>
 </html>
