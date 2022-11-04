@@ -1,53 +1,55 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1 id="p-top">
+<div id="center">
     <div class="main_box" style="background: #BDBDBD;">
         <img class="profile" src="{{ url_for('static', filename='img/profile.jpg') }}">
-</h1>
-<body style="background-color: #a9cbd7;" >
-    <div class="container-fluid">
-        <form class="row justify-content-md-center" method="post">
-            {{ form.csrf_token }}
-            {% include "form_errors.html" %}
-            <div class="row justify-content-md-center">
-                <div class="col-md-auto">
-                    <label for="username" class="visually-hidden">ID</label>
-                    <input type="text" class="form-control" name="username" id="username" value="{{ form.username.data or '' }}" placeholder="ID">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-1">
-                    <label></label>
-                </div>
-            </div>
-            <div class="row justify-content-md-center">
-                <div class="col-md-auto">
-                    <label for="password" class="visually-hidden">PW</label>
-                    <input type="password" class="form-control" name="password" id="password" value="{{ form.username.data or '' }}" placeholder="PW">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-1">
-                    <label></label>
-                </div>
-            </div>
-            <div class="row justify-content-md-center">
-                <div class="col-md-auto">
-                    <a href="{{ url_for('auth.signup') }}">회원가입</a>
-                </div>
-                <div class="col-md-1">
-                    <label></label>
-                </div>
-                <div class="col-md-auto">
-                    <button type="submit" class="btn btn-primary">로그인</button>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-1">
-                    <label></label>
-                </div>
-            </div>
-        </form>
     </div>
-</body>
+    <body style="background-color: #a9cbd7;" >
+        <div class="container-fluid">
+            <form class="row justify-content-md-center" method="post">
+                {{ form.csrf_token }}
+                {% include "form_errors.html" %}
+                <div class="row justify-content-md-center">
+                    <div class="col-md-auto">
+                        <label for="username" class="visually-hidden">ID</label>
+                        <input type="text" class="form-control" name="username" id="username" value="{{ form.username.data or '' }}" placeholder="ID">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-1">
+                        <label></label>
+                    </div>
+                </div>
+                <div class="row justify-content-md-center">
+                    <div class="col-md-auto">
+                        <label for="password" class="visually-hidden">PW</label>
+                        <input type="password" class="form-control" name="password" id="password" value="{{ form.username.data or '' }}" placeholder="PW">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-1">
+                        <label></label>
+                    </div>
+                </div>
+                <div class="row justify-content-md-center">
+                    <div class="col-md-auto">
+                        <a href="{{ url_for('auth.signup') }}">회원가입</a>
+                    </div>
+                    <div class="col-md-1">
+                        <label></label>
+                    </div>
+                    <div class="col-md-auto">
+                        <button type="submit" class="btn btn-primary">로그인</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-1">
+                        <label></label>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </body>
+</div>
+
 {% endblock %}
