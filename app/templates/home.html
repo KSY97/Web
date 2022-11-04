@@ -1,22 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>
+<h1 id="p-top">
     <div class="main_box" style="background: #BDBDBD;">
         <img class="profile" src="{{ url_for('static', filename='img/profile.jpg') }}">
 </h1>
-<body style="background-color: #a9cbd7;">
+<body style="background-color: #a9cbd7;" >
     <div class="container-fluid">
         <form class="row justify-content-md-center" method="post">
             {{ form.csrf_token }}
             {% include "form_errors.html" %}
-
-            {% if g.user %}
-            <div class="row justify-content-md-center">
-                <div class="col-md-auto">
-                    <a href="{{ url_for('auth.signup') }}">대화 기록 보기</a>
-                </div>
-            </div>
-            {% else %}
             <div class="row justify-content-md-center">
                 <div class="col-md-auto">
                     <label for="username" class="visually-hidden">ID</label>
@@ -55,7 +47,6 @@
                     <label></label>
                 </div>
             </div>
-            {% endif %}
         </form>
     </div>
 </body>

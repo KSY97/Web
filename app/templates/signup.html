@@ -21,6 +21,11 @@
                    value="{{ form.password2.data or '' }}">
         </div>
         <div class="mb-3">
+            <label for="tel">연락처</label>
+            <input type="text" class="form-control" name="tel" id="tel" maxlength="11" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                   value="{{ form.tel.data or '' }}">
+        </div>
+        <div class="mb-3">
             <label for="email">이메일</label>
             <input type="text" class="form-control" name="email" id="email"
                    value="{{ form.email.data or '' }}">

@@ -1,5 +1,7 @@
-html, body {
-    height: 100%
+html, body{
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 .main_box {
     display: block;
@@ -18,9 +20,12 @@ a {
     text-decoration-line: none;
   }
 #wrapper{
-    height: auto;
+    height: 100%;
     min-height: 100%;
-    padding-bottom: 100px;
+    /* padding-bottom: 100px; */
+}
+#p-top{
+  padding-top: 100px;
 }
 footer{
     background-color: #c0c0c0;
@@ -32,12 +37,6 @@ footer{
 /* 초기 리셋 스타일 */
 * {
     box-sizing: border-box;
-}
-  
-html,
-body {
-  margin: 0;
-  padding: 0;
 }
   
 /* rem 사용을 위한 루트 글자 크기 설정 */
@@ -52,35 +51,40 @@ html {
 */
   
 .container1 {
-  position: relative;
+  /* position: initial; */
+  width: 100%;
+  height: 100%;
 }
   
 .container1>.sidebar1 {
   background-color: darkgray;
 
   /* sidebar는 화면을 기준으로 배치 */
-  position: relative;
+  position: fixed;
   left: 0;
-  top: 0;
+  top: 45px;
   bottom: 0;
-  width: 40vh;
-  height: 84.6vh;
+  width: 25vw;
+  height: 100%;
 
-  padding: 5rem;
+  padding: 3rem;
 
-  z-index: 9999;
+  z-index: 99;
 }
 
 .container1>.contents1 {
   /* background-color: #74b9ff; */
 
   /* contents는 메인페이지(.container)를 기준으로 배치 */
+  background-color: #a9cbd7;
   position: absolute;
-  left: 40vh;
+  left: 25vw;
   right: 0;
   top: 0;
-
-  padding: 1rem;
+  bottom: 0;
+  height: 100%;
+  overflow: auto;
+  /* padding: 1rem; */
 }
 
 /*
@@ -88,7 +92,8 @@ html {
 - 사이드바는 화면 밖으로 이동시킴
 - 컨텐츠영역은 사이드바가 사라진 자리를 채움
 */
-.container1.collapse1 {}
+.container1 > .collapse1 {
+}
 
 .container1.collapse1>.sidebar1 {
   margin-left:-40rem;
@@ -201,51 +206,87 @@ html {
   transition:all 0.3s linear;
 }
 
-/* * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* 대화문 */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
-label{
 
-    align-items: center;
-    position: relative;
-    top: 0px;
-    left: 30px;
-    transition: .5s;
+a {
+  text-decoration: none;
 }
-.material-icons {
-    font-size: 3rem;
-    margin-right: 10px;
+
+.wrap {
+  padding: 40px 0;
+  background-color: #a9cbd7;
 }
-.bookmark-btt {
-    border: none;
-    outline: none;
-    background-color: transparent;
-    font-size: 3rem;
+
+.wrap .chat {
+  display: flex;
+  align-items: flex-start;
+  padding: 20px;
 }
-section {
-    background-color: #34495e;
-    color: #fff;
-    width: 200px;
-    padding-top: 30px;
-    padding-left: 30px;
-    position: absolute;
-    top: 0;
-    left: -200px;
-    bottom: 0;
-    transition: 1s ease;
+
+.wrap .chat .icon {
+  position: relative;
+  overflow: hidden;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #eee;
 }
-.bookmark-lists {
-    padding-left: 45px;
+
+.wrap .chat .icon i {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  font-size: 2.5rem;
+  color: #aaa;
+  transform: translateX(-50%);
 }
-.bookmark {
-    margin: 30px 0;
+
+.wrap .chat .textbox {
+  position: relative;
+  display: inline-block;
+  max-width: calc(100% - 70px);
+  padding: 10px;
+  margin-top: 7px;
+  font-size: 13px;
+  border-radius: 10px;
 }
-.bookmark:nth-child(1) {
-    margin-top: 50px;
+
+.wrap .chat .textbox::before {
+  position: absolute;
+  display: block;
+  top: 0;
+  font-size: 1.5rem;
 }
-.bookmark a {
-    color: #fff;
-    text-decoration: none;
-} */
+
+.wrap .ch1 .textbox {
+  margin-left: 20px;
+  max-width: 60%;
+  background-color: #ddd;
+}
+
+.wrap .ch1 .textbox::before {
+  left: -15px;
+  content: "◀";
+  color: #ddd;
+}
+
+.wrap .ch2 {
+  flex-direction: row-reverse;
+}
+
+.wrap .ch2 .textbox {
+  margin-right: 20px;
+  max-width: 60%;
+  background-color: #F9EB54;
+}
+
+.wrap .ch2 .textbox::before {
+  right: -15px;
+  content: "▶";
+  color: #F9EB54;
+}
