@@ -38,6 +38,6 @@ def home():
 def recode():
     if g.user:
         question_list = Question.query.order_by(Question.create_date)
-        return render_template('recode.html', question_list=question_list)
+        return render_template('recode.html', question_list=question_list, g_user = g.user)
     else:
         return redirect(url_for('main.home'))

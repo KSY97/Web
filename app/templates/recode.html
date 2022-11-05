@@ -1,48 +1,72 @@
 {% extends 'base.html' %}
 {% block content %}
 <!-- 메인 영역 -->
-<div class="container1" style='background-color: #a9cbd7'>
-
-    <!-- 사이드바 영역 -->
-    <div class="sidebar1">
-        123<br>
-        456
-  
-      <!-- 메뉴 상태 변경 버튼 추가 -->
-      <label class="toggle1">
-        <span></span>
-        <span></span>
-        <span></span>
-      </label>
-    </div>
-  
-    <!-- 
-              컨텐츠 영역 : 
-              - 더미 텍스트(Lorem ipsum)을 활용하여 내용 강제로 늘려 테스트
-          -->
+<div class="container1" style='background-color: #a9cbd7' >
+    {% set date_list = [] %}
+    <!-- 컨텐츠 영역 -->
     <div class="contents1">
         <body>
+            {% set view = namespace(value=False) %}
+            {% set check_date = namespace(year=0, month=0, day=0) %}
             <div class="wrap">
                 {% if question_list %}
                     {% for question in question_list %}
-                        <div class="chat ch2">
-                            <div class="icon"><i class="fa-solid fa-user"></i></div>
-                            <div class="textbox">{{ question.contents }}</div>
-                            <div class="date">{{ question.create_date }}</div>
-                        </div>
-                        {% if question.answer_set %}
-                            <div class="chat ch1">
+                        {% if question.user_id == g_user.id %}
+                        {% set view.value = True %}
+                        {% set date = namespace(year=question.create_date.year, month=question.create_date.month, day=question.create_date.day) %}
+                            {% if date.day != check_date.day %}
+                                {% set check_date.year = date.year %}
+                                {% set check_date.month = date.month %}
+                                {% set check_date.day = date.day %}
+                                {{ date_list.append(date.year|string+'년 '+date.month|string+'월 '+date.day|string+'일') or "" }}
+                                <a name="{{date_list[-1]}}" style="padding: 30px 20px 0 20px"></a>
+                                <p style="text-align: center; margin: 0;">{{date_list[-1]}}</p>
+                                <hr style="margin: 0; width : 95%;">
+                            {% endif %}
+                            <div class="chat ch2">
                                 <div class="icon"><i class="fa-solid fa-user"></i></div>
-                                <div class="textbox">{{ question.answer_set[0].contents }}</div>
-                                <div class="date">{{ question.create_date }}</div>
+                                <div class="textbox">{{ question.contents }}</div>
+                                <div class="date">{{ question.create_date.hour }}:{{ question.create_date.minute }}</div>
                             </div>
-                        {% endif %}  
+                            {% if question.answer_set %}
+                                <div class="chat ch1">
+                                    <div class="icon"><i class="fa-solid fa-user"></i></div>
+                                    <div class="textbox">{{ question.answer_set[0].contents }}</div>
+                                    <div class="date">{{ question.create_date.hour }}:{{ question.create_date.minute }}</div>
+                                </div>
+                            {% endif %}
+                        {% endif %} 
                     {% endfor %}
-                {% else %}
-                    <p> 기록이 없습니다 </p>
+                    {% if not view.value %}
+                        <p style="font-size: 50px; text-align: center; line-height: 50vh">기록이 없습니다.</p>
+                    {% endif %}
                 {% endif %}
             </div>
         </body>
+    </div>
+
+    <!-- 사이드바 영역 -->
+    <div class="sidebar1" style="overflow-y: scroll; font-size: larger;">
+        <!-- 메뉴 상태 변경 버튼 추가 -->
+        <label class="toggle1">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        <div id="nav">
+            <ul class="menu">
+                <li><a href="#">MENU 1</a>
+                    <ul class="sub">
+                        {% if date_list %}
+                            {% for dates in date_list %}
+                            <li><a href="#{{dates}}">{{dates}}</a></li>
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        
     </div>
   
 </div>

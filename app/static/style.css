@@ -1,7 +1,7 @@
 html, body{
-    height: 100%;
-    margin: 0;
-    padding: 0;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 .main_box {
     display: block;
@@ -39,7 +39,8 @@ footer{
 
 /* 초기 리셋 스타일 */
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
 }
   
 /* rem 사용을 위한 루트 글자 크기 설정 */
@@ -67,10 +68,10 @@ html {
   left: 0;
   top: 45px;
   bottom: 0;
-  width: 25vw;
-  height: 100%;
+  width: 30vw;
+  height: 95.5%;
 
-  padding: 3rem;
+  padding-left: 3rem;
 
   z-index: 99;
 }
@@ -81,13 +82,13 @@ html {
   /* contents는 메인페이지(.container)를 기준으로 배치 */
   background-color: #a9cbd7;
   position: absolute;
-  left: 25vw;
+  left: 30vw;
   right: 0;
   top: 0;
   bottom: 0;
-  height: 100%;
+  height: 95.2%;
   overflow: auto;
-  /* padding: 1rem; */
+  margin-top: 45px;
 }
 
 /*
@@ -213,7 +214,6 @@ html {
 * {
   padding: 0;
   margin: 0;
-  box-sizing: border-box;
 }
 
 a {
@@ -221,7 +221,6 @@ a {
 }
 
 .wrap {
-  padding: 40px 0;
   background-color: #a9cbd7;
 }
 
@@ -302,4 +301,20 @@ a {
   margin: auto 10px 0 10px;
   font-size: 13px;
   opacity: 0.8;
+}
+
+.sidebar1::-webkit-scrollbar {
+  width: 10px;
+}
+.sidebar1::-webkit-scrollbar-thumb {
+  background-color: #2f3542;
+  border-radius: 10px;
+}
+
+.contents1::-webkit-scrollbar {
+  width: 10px;
+}
+.contents1::-webkit-scrollbar-thumb {
+  background-color: #2f3542;
+  border-radius: 10px;
 }
