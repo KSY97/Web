@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- 메인 영역 -->
+<div class="container1" style='background-color: #a9cbd7' >
+    {% set date_list = [] %}
+    <!-- 컨텐츠 영역 -->
+    <div class="contents1">
+        <body>
+            {% set view = namespace(value=False) %}
+            {% set check_date = namespace(year=0, month=0, day=0) %}
+            <div class="wrap" id="reload">
+                {% if question_list %}
+                    {% for question in question_list %}
+                        {% if question.user_id == g_user.id %}
+                        {% set view.value = True %}
+                        {% set date = namespace(year=question.create_date.year, month=question.create_date.month, day=question.create_date.day) %}
+                            {% if date.day != check_date.day %}
+                                {% set check_date.year = date.year %}
+                                {% set check_date.month = date.month %}
+                                {% set check_date.day = date.day %}
+                                {{ date_list.append(date.year|string+'년 '+date.month|string+'월 '+date.day|string+'일') or "" }}
+                                <a name="{{date_list[-1]}}" style="padding: 10px"></a>
+                                <p style="text-align: center; margin: 0;">{{date_list[-1]}}</p>
+                                <hr style="margin: 0; width : 95%;">
+                            {% endif %}
+                            <div class="chat ch2">
+                                <div class="icon"><img class="profile" src="{{ url_for('static', filename='img/profile.jpg') }}"></div>
+                                <div class="textbox">{{ question.contents }}</div>
+                                {% if question.create_date.hour | string | length == 1 %}
+                                    {% if question.create_date.minute | string | length == 1 %}
+                                        <div class="date">0{{ question.create_date.hour }}:0{{ question.create_date.minute }}</div>
+                                    {% else %}
+                                        <div class="date">0{{ question.create_date.hour }}:{{ question.create_date.minute }}</div>
+                                    {% endif %}
+                                {% else %}
+                                    {% if question.create_date.minute | string | length == 1 %}
+                                        <div class="date">{{ question.create_date.hour }}:0{{ question.create_date.minute }}</div>
+                                    {% else %}
+                                        <div class="date">{{ question.create_date.hour }}:{{ question.create_date.minute }}</div>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                            {% if question.answer_set %}
+                                <div class="chat ch1">
+                                    <div class="icon"><img class="profile" src="{{ url_for('static', filename='img/profile.jpg') }}"></div>
+                                    <div class="textbox">{{ question.answer_set[0].contents }}</div>
+                                    {% if question.answer_set[0].create_date.hour | string | length == 1 %}
+                                        {% if question.answer_set[0].create_date.minute | string | length == 1 %}
+                                            <div class="date">0{{ question.answer_set[0].create_date.hour }}:0{{ question.answer_set[0].create_date.minute }}</div>
+                                        {% else %}
+                                            <div class="date">0{{ question.answer_set[0].create_date.hour }}:{{ question.answer_set[0].create_date.minute }}</div>
+                                        {% endif %}
+                                    {% else %}
+                                        {% if question.answer_set[0].create_date.minute | string | length == 1 %}
+                                            <div class="date">{{ question.answer_set[0].create_date.hour }}:0{{ question.answer_set[0].create_date.minute }}</div>
+                                        {% else %}
+                                            <div class="date">{{ question.answer_set[0].create_date.hour }}:{{ question.answer_set[0].create_date.minute }}</div>
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                        {% endif %} 
+                    {% endfor %}
+                    {% if not view.value %}
+                        <p style="font-size: 50px; text-align: center; line-height: 50vh">기록이 없습니다.</p>
+                    {% endif %}
+                {% endif %}
+                <div id = 'latest'></div>
+            </div>
+        </body>
+    </div>
+
+    <!-- 사이드바 영역 -->
+    <div class="sidebar1" style="overflow-y: scroll; font-size: larger;">
+        <!-- 메뉴 상태 변경 버튼 추가 -->
+        <label class="toggle1">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        <div id="nav">
+            <ul class="menu1">
+                <li>
+                    <a href="#"> 
+                        <div class="profile_box_small" style="background: #BDBDBD;">
+                            <img class="profile_small" src="{{ url_for('static', filename='img/profile.jpg') }}">
+                            
+                        </div>   
+                        <p style="margin:0;">이름</p>                 
+                    </a>
+                    <ul class="sub1">
+                        {% if date_list %}
+                            {% for dates in date_list %}
+                                <li><a href="#{{dates}}">{{dates}}</a></li>
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                </li>
+            </ul>
+            <ul class="menu2">
+                <li>
+                    <a href="#"> 
+                        <p style="margin:0;">기능</p>                 
+                    </a>
+                    <ul class="sub2">
+                        <li><a>1</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script src="{{ url_for('static', filename='menu.js') }}"></script>
+
+{% endblock %}

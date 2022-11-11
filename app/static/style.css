@@ -3,7 +3,7 @@ html, body{
   margin: 0;
   padding: 0;
 }
-.main_box {
+.profile_box {
     display: block;
     margin: 100px auto;
     width: 250px;
@@ -11,10 +11,23 @@ html, body{
     border-radius: 30%;
     overflow: hidden;
 }
+.profile_box_small {
+  display: block;
+  margin: auto;
+  width: 95px;
+  height: 95px; 
+  border-radius: 50%;
+  overflow: hidden;
+}
 .profile {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+.profile_small {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 a {
     text-decoration-line: none;
@@ -86,7 +99,7 @@ html {
   right: 0;
   top: 0;
   bottom: 0;
-  height: 95.2%;
+  height: auto;
   overflow: auto;
   margin-top: 45px;
 }
@@ -231,6 +244,21 @@ a {
   height: auto;
 }
 
+.chat {
+  display: flex;
+  align-items: flex-start;
+  padding: 20px;
+  height: auto;
+}
+.chat .icon {
+  position: relative;
+  overflow: hidden;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #eee;
+}
+
 .wrap .chat .icon {
   position: relative;
   overflow: hidden;
@@ -317,4 +345,60 @@ a {
 .contents1::-webkit-scrollbar-thumb {
   background-color: #2f3542;
   border-radius: 10px;
+}
+
+body {
+  opacity: 1;
+  transition-duration: 2s;
+  transition-property: opacity;
+}
+
+body.fade {
+  opacity: 0;
+}
+
+#nav {
+  font-family:'arial'; 
+}
+
+#nav ul{
+  width:100%;
+  margin:0;
+  padding:0; 
+}
+
+#nav ul li{
+  position:relative;
+  float:left;
+  width:100%;
+  list-style-type:none;
+  font-size: clamp(0.8rem, 1vw, 3rem);
+}
+
+#nav ul li a{
+  display:block;
+  width:100%;
+  height:100%;
+  line-height:10vh;
+  text-align: center;
+  color:#000;
+  font-weight:bold;
+  text-decoration:none;
+}
+
+#nav ul li a:hover{
+  background:#eee; 
+}
+
+#nav ul li .sub a{
+  position:relative; 
+  float:left; 
+  display:block; 
+  width:100%; 
+  z-index:999; 
+  background:#ccc; 
+}
+
+#nav ul li .sub a:hover{
+  background:#444; color:#fff; 
 }

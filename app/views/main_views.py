@@ -1,20 +1,16 @@
-from tarfile import RECORDSIZE
 from flask import Blueprint, render_template, url_for, flash, request, session, g
 from werkzeug.security import check_password_hash
 from werkzeug.utils import redirect
 
-from app import db
 from app.forms import UserLoginForm
 from app.models import User
-
-from app.models import Question
 
 bp = Blueprint('main', __name__, url_prefix='/')
 
 @bp.route('/')
 def index():
     if g.user:
-        return redirect(url_for('main.recode'))
+        return redirect(url_for('record.record'))
     else:
         return redirect(url_for('main.home'))
 @bp.route('/home', methods=('GET', 'POST'))
@@ -33,11 +29,3 @@ def home():
             return redirect(url_for('main.index'))
         flash(error)
     return render_template('home.html', form=form)
-
-@bp.route('/recode')
-def recode():
-    if g.user:
-        question_list = Question.query.order_by(Question.create_date)
-        return render_template('recode.html', question_list=question_list, g_user = g.user)
-    else:
-        return redirect(url_for('main.home'))
