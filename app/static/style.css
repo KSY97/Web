@@ -74,7 +74,7 @@ html {
 }
   
 .container1>.sidebar1 {
-  background-color: darkgray;
+  background-color: #dee2e6;
 
   /* sidebar는 화면을 기준으로 배치 */
   position: fixed;
@@ -89,11 +89,13 @@ html {
   z-index: 99;
 }
 
+
+
 .container1>.contents1 {
   /* background-color: #74b9ff; */
 
   /* contents는 메인페이지(.container)를 기준으로 배치 */
-  background-color: #a9cbd7;
+  background-color: #f8f9fa;
   position: absolute;
   left: 30vw;
   right: 0;
@@ -297,13 +299,13 @@ a {
 .wrap .ch1 .textbox {
   margin-left: 20px;
   max-width: 60%;
-  background-color: #ddd;
+  background-color: white;
 }
 
 .wrap .ch1 .textbox::before {
   left: -15px;
   content: "◀";
-  color: #ddd;
+  color: white;
 }
 
 .wrap .ch2 {

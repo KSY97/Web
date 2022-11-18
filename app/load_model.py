@@ -1,5 +1,3 @@
-from numpy import dot
-from numpy.linalg import norm
 import pickle
 
 path = 'C:/Users/AI8_KSY/Desktop/Web/app/'

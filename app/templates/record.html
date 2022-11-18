@@ -61,11 +61,11 @@
                             {% endif %}
                         {% endif %} 
                     {% endfor %}
+                    <ul style="margin: 0; padding: 0;" id="messages"></ul>
                     {% if not view.value %}
                         <p style="font-size: 50px; text-align: center; line-height: 50vh">기록이 없습니다.</p>
                     {% endif %}
                 {% endif %}
-                <div id = 'latest'></div>
             </div>
         </body>
     </div>
@@ -86,7 +86,7 @@
                             <img class="profile_small" src="{{ url_for('static', filename='img/profile.jpg') }}">
                             
                         </div>   
-                        <p style="margin:0;">이름</p>                 
+                        <p style="margin:0;">{{ g_user.username }}</p>                 
                     </a>
                     <ul class="sub1">
                         {% if date_list %}
@@ -100,10 +100,10 @@
             <ul class="menu2">
                 <li>
                     <a href="#"> 
-                        <p style="margin:0;">기능</p>                 
+                        <p style="margin:0;">메뉴</p>                 
                     </a>
                     <ul class="sub2">
-                        <li><a>1</a></li>
+                        <li><a href="{{ url_for('analysis.analysis') }}">분석</a></li>
                     </ul>
                 </li>
             </ul>

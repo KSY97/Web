@@ -23,4 +23,9 @@ class Answer(db.Model):
     create_date = db.Column(db.DateTime(), nullable=False)
     ftp_address = db.Column(db.Text(), nullable=True)
 
-    
+class Survey(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'))
+    user = db.relationship('User', backref=db.backref('survey_set'))
+    score = db.Column(db.Integer, nullable=False)
+    create_date = db.Column(db.DateTime(), nullable=False)
