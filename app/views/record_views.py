@@ -10,13 +10,15 @@ from app.models import Question, Answer
 from app.load_model import model, train_data
 from datetime import datetime
 
-from gtts import gTTS
-# from vocoding.waveglow.tacotron2.inference_1 import synthesizer
-# from scipy.io.wavfile import write
+# from gtts import gTTS
+from app.vocoding.waveglow.tacotron2.inference_1 import synthesizer
+from scipy.io.wavfile import write
 import ftplib
 
 from flask_socketio import send, emit
 from app import socket_io
+
+from pydub import AudioSegment
 
 
 # ftp 정보
@@ -48,7 +50,7 @@ def record():
 
 @socket_io.on("message")
 def request(message):
-    # print("message : ", message)
+    print("message : ", message)
     to_client = dict()
     if not message == 'new_connect':
 
@@ -92,14 +94,22 @@ def request(message):
         send(to_client, broadcast = True)
 
         if not answer.ftp_address:
-            file_name = 'test_' + str(answer.question_id) + '.mp3'
-            tts = gTTS(
-                text = answer.contents,
-                lang = 'ko', slow = False
-            )
-            tts.save(file_name)
-            # audio, sampling_rate = synthesizer.inference(answer.contents)
-            # write(file_name, sampling_rate, audio)
+            file_name = 'test_' + str(answer.question_id) + '.wav'
+            # tts = gTTS(
+            #     text = answer.contents,
+            #     lang = 'ko', slow = False
+            # )
+            # tts.save(file_name)
+            audio, sampling_rate = synthesizer.inference(answer.contents)
+            write(file_name, sampling_rate, audio)
+
+            # files                                                                         
+            file_name_mp3 = 'test_' + str(answer.question_id) + '.mp3'
+            
+
+            # convert wav to mp3                                                            
+            sound = AudioSegment.from_wav(file_name)
+            sound.export(file_name_mp3, format="mp3")
 
             try:
                 # ftp 연결
@@ -111,8 +121,8 @@ def request(message):
                     ftp.cwd('/home')  # 현재 폴더 이동
                 
                     # 파일업로드
-                    with open(file=file_name, mode='rb') as wf:
-                        ftp.storbinary('STOR '+file_name, wf)
+                    with open(file=file_name_mp3, mode='rb') as wf:
+                        ftp.storbinary('STOR '+file_name_mp3, wf)
                 
                     # print(ftp.dir())
                     # print('업로드 완료')
@@ -124,8 +134,10 @@ def request(message):
                 answer.ftp_address = file_name
                 db.session.commit()
                 # print('db 기록 완료')
-                # 파일 삭제
-                # if os.path.exists(file_name):
-                #     os.remove(file_name)
+                #파일 삭제
+                if os.path.exists(file_name):
+                    os.remove(file_name)
+                if os.path.exists(file_name_mp3):
+                    os.remove(file_name)
 
     emit('response', '응답 완료')

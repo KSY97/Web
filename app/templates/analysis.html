@@ -3,14 +3,14 @@
 <body style="background-color: #a9cbd7;" >
     {% set view = namespace(value=False) %}
     {% if survey_list %}
-        <p style="font-size: 30px; text-align: center; padding-top: 20vh">최근 설문 일자는 {{survey_list[-1][1]}} 입니다.
+        <p style="font-size: 30px; text-align: center; padding-top: 15%">최근 설문 일자는 {{survey_list[-1][1]}} 입니다.
             <br> 이날의 점수는 {{ survey_list[-1][0] }}점 입니다</p>
         {% if survey_list[-1][0] <= 10 %}
             <p style="font-size: 30px; text-align: center;">우울증 징후가 발견되지 않았습니다</p>
         {% else %}
             <p style="font-size: 30px; text-align: center;">우울증 의심 상태입니다</p>
         {% endif %}
-        <div id="linechart" style="margin: 100px;"></div>
+        <div id="linechart" style="margin: 0px 100px;"></div>
     {% else %}
         <p style="font-size: 50px; text-align: center; line-height: 50vh">기록이 없습니다.</p>
     {% endif %}
@@ -18,7 +18,7 @@
     <script>
         var survey_list = {{ survey_list|tojson }};
         var axis_x = ['x']
-        var axis_y = ['y']
+        var axis_y = [{{ g_user.username|tojson }}]
 
         for (var value of survey_list){
             axis_y.push(value[0]);
@@ -42,29 +42,20 @@
                     },
                     type : 'category',
 			        tick: {
-                        rotate: 75,
+                        rotate: 30,
 					    format: '%Y-%m-%d %H:%M'
 			        }
                 },
                 y: {
-                    max: 20,
-                    min: 0,
+                    beginAtZero: true,
+                    max: 15,
+                    stepSize : 1,
+                    // min: 1,
                     label: { // ADD
                         text: 'Score'
                     }
                 }
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            min: 0,
-                            max: 20,
-                            fontSize : 14,
-                        }
-                    }]
-                }
-		}
+            }
         });
     </script>
 </body>

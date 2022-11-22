@@ -1,6 +1,6 @@
 import pickle
 
-path = 'C:/Users/AI8_KSY/Desktop/Web/app/'
+path = 'C:/Users/YGL/Desktop/ksy/Web/app/'
 
 with open(path + 'data.pkl','rb') as f:
     df = pickle.load(f)
